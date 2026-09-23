@@ -1,0 +1,14 @@
+---
+author: Little Godzilla Laboratory
+package_name: tictactoe_policy
+generator:
+  component: python-lib
+  inputs:
+    project_id: tictactoe-policy
+    project_name: TicTacToe Policy
+    project_desc: Learned policy for Tic-Tac-Toe game with configurable-size boards
+    author_name: Little Godzilla Laboratory
+    author_email: blah+lgl@cliffano.com
+    author_url: null
+    github_id: littlegodzillalaboratory
+    github_repo: tictactoe-policy

@@ -1,0 +1,115 @@
+"""Board configuration and rules for configurable Tic-Tac-Toe."""
+
+from dataclasses import dataclass
+from typing import Iterable, Sequence
+
+
+@dataclass(frozen=True)
+class GameConfig:
+    """Immutable game dimensions."""
+
+    board_size: int = 3
+    win_length: int | None = None
+
+    def __post_init__(self) -> None:
+        if not 3 <= self.board_size <= 8:
+            raise ValueError("board_size must be between 3 and 8")
+        if self.win_length is None:
+            object.__setattr__(self, "win_length", self.board_size)
+        if not 1 <= self.win_length <= self.board_size:
+            raise ValueError("win_length must be between 1 and board_size")
+
+    @property
+    def cell_count(self) -> int:
+        """Return the number of cells."""
+        return self.board_size * self.board_size
+
+
+class TicTacToeGame:
+    """Validate boards and implement rules derived from a :class:`GameConfig`."""
+
+    def __init__(self, config: GameConfig | None = None) -> None:
+        self.config = config or GameConfig()
+        self.lines = tuple(self._winning_lines())
+
+    def _winning_lines(self) -> Iterable[tuple[int, ...]]:
+        size = self.config.board_size
+        length = self.config.win_length
+        directions = ((0, 1), (1, 0), (1, 1), (1, -1))
+        for row in range(size):
+            for column in range(size):
+                for delta_row, delta_column in directions:
+                    end_row = row + (length - 1) * delta_row
+                    end_column = column + (length - 1) * delta_column
+                    if 0 <= end_row < size and 0 <= end_column < size:
+                        yield tuple(
+                            (row + step * delta_row) * size
+                            + column
+                            + step * delta_column
+                            for step in range(length)
+                        )
+
+    def validate_board(
+        self, board: Sequence[int], check_reachable: bool = True
+    ) -> tuple[int, ...]:
+        """Validate and return an immutable board."""
+        if len(board) != self.config.cell_count:
+            raise ValueError(
+                f"board must contain {self.config.cell_count} cells, got {len(board)}"
+            )
+        result = tuple(board)
+        if any(cell not in (-1, 0, 1) for cell in result):
+            raise ValueError("board cells must be -1, 0, or 1")
+        if check_reachable:
+            x_count = result.count(1)
+            o_count = result.count(-1)
+            if x_count not in (o_count, o_count + 1):
+                raise ValueError("board has an invalid number of X and O marks")
+            winners = self.winners(result)
+            if len(winners) > 1:
+                raise ValueError("board cannot contain wins for both players")
+            if winners == {1} and x_count != o_count + 1:
+                raise ValueError("X win has an invalid turn count")
+            if winners == {-1} and x_count != o_count:
+                raise ValueError("O win has an invalid turn count")
+        return result
+
+    def winners(self, board: Sequence[int]) -> set[int]:
+        """Return every player with a completed winning line."""
+        return {
+            board[line[0]]
+            for line in self.lines
+            if board[line[0]] != 0
+            and all(board[index] == board[line[0]] for index in line)
+        }
+
+    def winner(self, board: Sequence[int]) -> int:
+        """Return the winner, or zero when there is none."""
+        winners = self.winners(board)
+        return next(iter(winners)) if len(winners) == 1 else 0
+
+    def legal_moves(self, board: Sequence[int]) -> list[int]:
+        """Return unoccupied move indices."""
+        return [index for index, cell in enumerate(board) if cell == 0]
+
+    def is_terminal(self, board: Sequence[int]) -> bool:
+        """Return whether a board is won or full."""
+        return bool(self.winners(board)) or 0 not in board
+
+    def infer_player(self, board: Sequence[int]) -> int:
+        """Infer the current player from an X-first reachable board."""
+        valid = self.validate_board(board)
+        if self.is_terminal(valid):
+            raise ValueError("cannot infer a player for a terminal board")
+        return 1 if valid.count(1) == valid.count(-1) else -1
+
+    @staticmethod
+    def apply_move(board: Sequence[int], move: int, player: int) -> tuple[int, ...]:
+        """Return a board with one legal move applied."""
+        if player not in (-1, 1):
+            raise ValueError("player must be -1 or 1")
+        if move < 0 or move >= len(board) or board[move] != 0:
+            raise ValueError("move must identify an empty cell")
+        result = list(board)
+        result[move] = player
+        return tuple(result)
