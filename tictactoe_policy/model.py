@@ -3,12 +3,15 @@
 import torch
 from torch import nn
 
+from .game import GameConfig
+
 
 class PolicyNetwork(nn.Module):
     """One-hidden-layer policy whose dimensions derive from board size."""
 
     def __init__(self, board_size: int = 3, hidden_size: int = 16) -> None:
         super().__init__()
+        GameConfig(board_size)
         if hidden_size < 1:
             raise ValueError("hidden_size must be at least 1")
         cell_count = board_size * board_size

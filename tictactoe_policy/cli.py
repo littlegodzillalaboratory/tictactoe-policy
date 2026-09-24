@@ -4,7 +4,7 @@ import argparse
 import json
 
 from .evaluation import evaluate_policy
-from .game import GameConfig
+from .game import MAX_BOARD_SIZE, MIN_BOARD_SIZE, GameConfig
 from .policy import TicTacToePolicy
 from .training import train_policy
 
@@ -14,7 +14,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="tictactoe-policy")
     commands = parser.add_subparsers(dest="command", required=True)
     train = commands.add_parser("train", help="generate data and train a policy")
-    train.add_argument("--board-size", type=int, required=True)
+    train.add_argument(
+        "--board-size",
+        type=int,
+        choices=range(MIN_BOARD_SIZE, MAX_BOARD_SIZE + 1),
+        required=True,
+    )
     train.add_argument("--win-length", type=int)
     train.add_argument("--hidden-size", type=int, default=16)
     train.add_argument("--samples", type=int, default=10_000)

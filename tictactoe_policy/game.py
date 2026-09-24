@@ -3,6 +3,9 @@
 from dataclasses import dataclass
 from typing import Iterable, Sequence
 
+MIN_BOARD_SIZE = 3
+MAX_BOARD_SIZE = 8
+
 
 @dataclass(frozen=True)
 class GameConfig:
@@ -12,8 +15,10 @@ class GameConfig:
     win_length: int | None = None
 
     def __post_init__(self) -> None:
-        if not 3 <= self.board_size <= 8:
-            raise ValueError("board_size must be between 3 and 8")
+        if not MIN_BOARD_SIZE <= self.board_size <= MAX_BOARD_SIZE:
+            raise ValueError(
+                f"board_size must be between {MIN_BOARD_SIZE} and {MAX_BOARD_SIZE}"
+            )
         if self.win_length is None:
             object.__setattr__(self, "win_length", self.board_size)
         if not 1 <= self.win_length <= self.board_size:

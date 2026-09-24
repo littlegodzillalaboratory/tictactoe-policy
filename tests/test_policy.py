@@ -13,6 +13,13 @@ def test_architecture_dimensions_and_parameter_count():
     assert network.parameter_count == 16 * 8 + 8 + 8 * 16 + 16
 
 
+@pytest.mark.parametrize("size", [2, 9])
+def test_architecture_rejects_unsupported_board_size(size):
+    """The low-level network enforces the supported board range."""
+    with pytest.raises(ValueError, match="between 3 and 8"):
+        PolicyNetwork(size)
+
+
 def test_illegal_move_masking():
     """Occupied moves can never be selected."""
     policy = TicTacToePolicy(GameConfig(3), 2)
