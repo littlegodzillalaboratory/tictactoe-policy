@@ -4,7 +4,14 @@ from typing import Sequence
 
 
 def transform_move(move: int, size: int, transform: int) -> int:
-    """Transform a move using one of eight rotations/reflections."""
+    """Transform a move using a square-board rotation or reflection.
+
+    :param move: Row-major move index.
+    :param size: Board width and height.
+    :param transform: Dihedral transform index from ``0`` through ``7``.
+    :returns: Transformed row-major move index.
+    :raises ValueError: If ``transform`` is outside the supported range.
+    """
     if transform not in range(8):
         raise ValueError("transform must be between 0 and 7")
     row, column = divmod(move, size)
@@ -16,7 +23,14 @@ def transform_move(move: int, size: int, transform: int) -> int:
 
 
 def transform_board(board: Sequence[int], size: int, transform: int) -> tuple[int, ...]:
-    """Transform a board with the same mapping used for moves."""
+    """Transform a board using the move-index mapping.
+
+    :param board: Board cells in row-major order.
+    :param size: Board width and height.
+    :param transform: Dihedral transform index from ``0`` through ``7``.
+    :returns: Transformed immutable board.
+    :raises ValueError: If ``transform`` is outside the supported range.
+    """
     result = [0] * len(board)
     for move, cell in enumerate(board):
         result[transform_move(move, size, transform)] = cell
@@ -26,7 +40,13 @@ def transform_board(board: Sequence[int], size: int, transform: int) -> tuple[in
 def augment(
     board: Sequence[int], moves: set[int], size: int
 ) -> list[tuple[tuple[int, ...], set[int]]]:
-    """Return unique symmetry-equivalent board and target pairs."""
+    """Generate unique symmetry-equivalent board and target pairs.
+
+    :param board: Board cells in row-major order.
+    :param moves: Target move indices associated with the board.
+    :param size: Board width and height.
+    :returns: Unique rotated and reflected board/move pairs.
+    """
     unique: dict[
         tuple[tuple[int, ...], tuple[int, ...]], tuple[tuple[int, ...], set[int]]
     ] = {}

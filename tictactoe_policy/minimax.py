@@ -7,7 +7,10 @@ from .game import GameConfig, TicTacToeGame
 
 
 class ExactMinimax:
-    """Solve standard 3x3 positions exactly."""
+    """Solve standard 3x3 positions exactly.
+
+    :ivar game: Standard 3x3 game used to validate and search positions.
+    """
 
     def __init__(self) -> None:
         self.game = TicTacToeGame(GameConfig(3, 3))
@@ -26,7 +29,14 @@ class ExactMinimax:
         )
 
     def best_moves(self, board: Sequence[int], player: int | None = None) -> set[int]:
-        """Return all mathematically optimal legal moves."""
+        """Find all mathematically optimal legal moves.
+
+        :param board: Reachable standard 3x3 board.
+        :param player: Player to optimize for, inferred when omitted.
+        :returns: Optimal legal move indices, or an empty set for a terminal
+            board.
+        :raises ValueError: If the board is invalid.
+        """
         valid = self.game.validate_board(board)
         if self.game.is_terminal(valid):
             return set()
@@ -39,14 +49,24 @@ class ExactMinimax:
         return {move for move, score in scores.items() if score == best}
 
     def value(self, board: Sequence[int], player: int | None = None) -> int:
-        """Return the exact outcome value, preferring quicker wins."""
+        """Calculate the exact outcome value, preferring quicker wins.
+
+        :param board: Reachable standard 3x3 board.
+        :param player: Player whose perspective to score, inferred when omitted.
+        :returns: Positive for a forced win, negative for a forced loss, and
+            zero for a forced draw.
+        :raises ValueError: If the board is invalid.
+        """
         valid = self.game.validate_board(board)
         current = player or self.game.infer_player(valid)
         return self._value(valid, current)
 
 
 def reachable_positions() -> list[tuple[tuple[int, ...], int]]:
-    """Enumerate all distinct reachable, non-terminal standard positions."""
+    """Enumerate distinct reachable, non-terminal standard positions.
+
+    :returns: Pairs of board state and the player whose turn follows it.
+    """
     game = TicTacToeGame()
     found: dict[tuple[int, ...], int] = {}
 

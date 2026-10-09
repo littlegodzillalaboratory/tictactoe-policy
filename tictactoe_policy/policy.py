@@ -10,8 +10,17 @@ from .model import PolicyNetwork
 
 
 class TicTacToePolicy:
-    """Wrap a policy network with validation, masking, and persistence."""
+    """Wrap a policy network with validation, masking, and persistence.
 
+    :param config: Game dimensions expected by the policy.
+    :param hidden_size: Number of neurons in the network's hidden layer.
+    :ivar config: Game dimensions expected by the policy.
+    :ivar hidden_size: Number of neurons in the hidden layer.
+    :ivar game: Rules used to validate boards and moves.
+    :ivar network: Neural network used to score moves.
+    """
+
+    #: Version of the metadata-bearing checkpoint representation.
     FORMAT_VERSION = 1
 
     def __init__(self, config: GameConfig, hidden_size: int = 16) -> None:
@@ -22,21 +31,37 @@ class TicTacToePolicy:
 
     @property
     def board_size(self) -> int:
-        """Return the configured board width."""
+        """Return the configured board width.
+
+        :returns: Number of rows and columns.
+        """
         return self.config.board_size
 
     @property
     def win_length(self) -> int:
-        """Return the configured winning line length."""
+        """Return the configured winning line length.
+
+        :returns: Consecutive marks required to win.
+        """
         return self.config.win_length
 
     @property
     def parameter_count(self) -> int:
-        """Return the network parameter count."""
+        """Return the network parameter count.
+
+        :returns: Number of trainable scalar parameters.
+        """
         return self.network.parameter_count
 
     def move_scores(self, board: Sequence[int]) -> list[float]:
-        """Return scores with occupied cells masked to negative infinity."""
+        """Score every move from the current player's perspective.
+
+        Occupied cells are assigned negative infinity so they cannot be chosen.
+
+        :param board: Reachable, non-terminal board in row-major order.
+        :returns: One score per board cell.
+        :raises ValueError: If the board is invalid or terminal.
+        """
         valid = self.game.validate_board(board)
         if self.game.is_terminal(valid):
             raise ValueError("cannot score moves on a terminal board")
@@ -51,12 +76,20 @@ class TicTacToePolicy:
         return scores.tolist()
 
     def choose_move(self, board: Sequence[int]) -> int:
-        """Return the highest-scoring legal move."""
+        """Choose the highest-scoring legal move.
+
+        :param board: Reachable, non-terminal board in row-major order.
+        :returns: Row-major index of the selected move.
+        :raises ValueError: If the board is invalid or terminal.
+        """
         scores = self.move_scores(board)
         return int(max(range(len(scores)), key=scores.__getitem__))
 
     def save(self, path: str | Path) -> None:
-        """Save weights and the metadata needed to reconstruct this policy."""
+        """Save the policy as a metadata-bearing PyTorch checkpoint.
+
+        :param path: Destination ``.pt`` file.
+        """
         torch.save(
             {
                 "format_version": self.FORMAT_VERSION,
@@ -70,7 +103,13 @@ class TicTacToePolicy:
 
     @classmethod
     def load(cls, path: str | Path) -> "TicTacToePolicy":
-        """Load a policy from a metadata-bearing model checkpoint."""
+        """Load a policy from a metadata-bearing PyTorch checkpoint.
+
+        :param path: Source ``.pt`` file.
+        :returns: Reconstructed policy in evaluation mode.
+        :raises ValueError: If required checkpoint metadata is missing or
+            invalid.
+        """
         checkpoint = torch.load(path, map_location="cpu", weights_only=True)
         required = {"state_dict", "board_size", "win_length", "hidden_size"}
         if not isinstance(checkpoint, dict) or not required <= checkpoint.keys():

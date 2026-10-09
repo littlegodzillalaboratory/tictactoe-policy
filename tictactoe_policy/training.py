@@ -13,15 +13,26 @@ from .policy import TicTacToePolicy
 
 @dataclass(frozen=True)
 class TrainingResult:
-    """Summary of a completed training run."""
+    """Summary of a completed training run.
 
+    :ivar policy: Trained policy in evaluation mode.
+    :ivar example_count: Number of distinct examples used for training.
+    :ivar final_loss: Loss recorded after the final epoch.
+    """
+
+    #: Trained policy in evaluation mode.
     policy: TicTacToePolicy
+    #: Number of distinct examples used for training.
     example_count: int
+    #: Loss recorded after the final epoch.
     final_loss: float
 
 
 def seed_everything(seed: int) -> None:
-    """Seed Python and PyTorch generators."""
+    """Seed Python and PyTorch random generators.
+
+    :param seed: Seed applied to both generators.
+    """
     random.seed(seed)
     torch.manual_seed(seed)
 
@@ -39,7 +50,23 @@ def train_policy(
 ) -> (
     TrainingResult
 ):  # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-locals
-    """Generate teacher data, train a policy, and optionally save it."""
+    """Generate teacher data, train a policy, and optionally save it.
+
+    Exact minimax examples are used for standard 3x3 games. Other game
+    configurations use sampled positions labelled by bounded search.
+
+    :param config: Dimensions and winning condition for the policy.
+    :param hidden_size: Number of neurons in the network's hidden layer.
+    :param samples: Number of sampled examples for non-standard games.
+    :param search_depth: Teacher depth for non-standard games.
+    :param epochs: Number of full optimization passes.
+    :param learning_rate: Adam optimizer learning rate.
+    :param seed: Seed controlling sampling and weight initialization.
+    :param symmetry: Augment examples with rotations and reflections.
+    :param output: Optional destination for the trained ``.pt`` checkpoint.
+    :returns: Trained policy and summary metrics.
+    :raises ValueError: If ``epochs`` or another training setting is invalid.
+    """
     if epochs < 1:
         raise ValueError("epochs must be at least 1")
     seed_everything(seed)

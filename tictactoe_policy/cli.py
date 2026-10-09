@@ -13,7 +13,10 @@ logger = init(__name__, stdout=True, message_only=True)
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """Build the discoverable command parser."""
+    """Build the command-line argument parser.
+
+    :returns: Parser containing the ``train`` and ``evaluate`` subcommands.
+    """
     parser = argparse.ArgumentParser(prog="tictactoe-policy")
     commands = parser.add_subparsers(dest="command", required=True)
     train = commands.add_parser("train", help="generate data and train a policy")
@@ -42,7 +45,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
-    """Run the selected command."""
+    """Parse command-line arguments and run the selected subcommand."""
     args = build_parser().parse_args()
     if args.command == "train":
         config = GameConfig(args.board_size, args.win_length)

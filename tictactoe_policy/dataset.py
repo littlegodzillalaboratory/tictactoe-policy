@@ -14,7 +14,13 @@ MoveTeacher: TypeAlias = ExactMinimax | BoundedSearch
 
 
 def immediate_moves(game: TicTacToeGame, board: Sequence[int], player: int) -> set[int]:
-    """Return moves that immediately win for ``player``."""
+    """Find moves that immediately win for a player.
+
+    :param game: Game rules used to evaluate candidate moves.
+    :param board: Board cells in row-major order.
+    :param player: Player mark, either ``1`` or ``-1``.
+    :returns: Indices of all immediately winning legal moves.
+    """
     return {
         move
         for move in game.legal_moves(board)
@@ -38,7 +44,12 @@ def _target_moves(
 
 
 def exact_examples(use_symmetry: bool = False) -> list[Example]:
-    """Generate every reachable non-terminal 3x3 position with exact targets."""
+    """Generate exact training examples for standard 3x3 Tic-Tac-Toe.
+
+    :param use_symmetry: Include rotated and reflected equivalents when true.
+    :returns: Every distinct reachable non-terminal position paired with its
+        mathematically optimal moves.
+    """
     teacher = ExactMinimax()
     examples: list[Example] = []
     for board, player in reachable_positions():
@@ -58,7 +69,17 @@ def sampled_examples(
     seed: int = 42,
     use_symmetry: bool = True,
 ) -> list[Example]:
-    """Generate sampled reachable positions and bounded-teacher targets."""
+    """Generate sampled positions and bounded-search targets.
+
+    :param game: Game whose positions should be sampled.
+    :param sample_count: Maximum number of examples to collect before
+        deduplication.
+    :param search_depth: Maximum teacher search depth.
+    :param seed: Seed controlling reproducible game sampling.
+    :param use_symmetry: Include rotated and reflected equivalents when true.
+    :returns: Distinct normalized boards paired with preferred move indices.
+    :raises ValueError: If ``sample_count`` is less than one.
+    """
     if sample_count < 1:
         raise ValueError("sample_count must be at least 1")
     randomizer = random.Random(seed)
@@ -102,7 +123,14 @@ def tactical_accuracy(
     examples: Sequence[Example],
     chooser: Callable[[Sequence[float]], int],
 ) -> tuple[float, float]:
-    """Return immediate-win and required-block accuracies for examples."""
+    """Calculate tactical move accuracy over training examples.
+
+    :param game: Game rules used to identify tactical positions.
+    :param examples: Normalized boards and their target moves.
+    :param chooser: Callable returning a move index for a normalized board.
+    :returns: A pair containing immediate-win accuracy and required-block
+        accuracy. A category with no examples has accuracy ``1.0``.
+    """
     wins = blocks = win_correct = block_correct = 0
     for normalized, _ in examples:
         board = tuple(int(cell) for cell in normalized)

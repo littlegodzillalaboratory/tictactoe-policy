@@ -7,7 +7,14 @@ from .game import TicTacToeGame
 
 
 class BoundedSearch:
-    """Deterministic depth-limited negamax search with an open-line heuristic."""
+    """Depth-limited negamax search with an open-line heuristic.
+
+    :param game: Configured game to search.
+    :param max_depth: Maximum number of plies to explore.
+    :raises ValueError: If ``max_depth`` is less than one.
+    :ivar game: Configured game being searched.
+    :ivar max_depth: Maximum search depth in plies.
+    """
 
     def __init__(self, game: TicTacToeGame, max_depth: int = 3) -> None:
         if max_depth < 1:
@@ -54,7 +61,13 @@ class BoundedSearch:
         return value
 
     def best_moves(self, board: Sequence[int], player: int | None = None) -> set[int]:
-        """Return all moves tied for the best bounded-search score."""
+        """Find all moves tied for the best bounded-search score.
+
+        :param board: Reachable board to search.
+        :param player: Player to optimize for, inferred when omitted.
+        :returns: Best legal move indices, or an empty set for a terminal board.
+        :raises ValueError: If the board is invalid.
+        """
         valid = self.game.validate_board(board)
         if self.game.is_terminal(valid):
             return set()
@@ -67,7 +80,13 @@ class BoundedSearch:
         return {move for move, score in scores.items() if score == best}
 
     def score(self, board: Sequence[int], player: int | None = None) -> float:
-        """Return the bounded-search value of a position."""
+        """Calculate the bounded-search value of a position.
+
+        :param board: Reachable board to search.
+        :param player: Player whose perspective to score, inferred when omitted.
+        :returns: Heuristic position score at the configured search depth.
+        :raises ValueError: If the board is invalid.
+        """
         valid = self.game.validate_board(board)
         current = player or self.game.infer_player(valid)
         return self._search(valid, current, self.max_depth, -inf, inf)

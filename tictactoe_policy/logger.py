@@ -14,13 +14,10 @@ def init(
 ) -> logging.LoggerAdapter:
     """Create a configured logger for a package module.
 
-    Args:
-        name: Logger name, normally the calling module's ``__name__``.
-        stdout: Send records to stdout instead of the logging default stderr.
-        message_only: Omit package name and level from the output format.
-
-    Returns:
-        A Conflog-configured logger adapter.
+    :param name: Logger name, normally the calling module's ``__name__``.
+    :param stdout: Send records to stdout instead of the default stderr.
+    :param message_only: Omit package name and level from the output format.
+    :returns: A Conflog-configured logger adapter.
     """
     output_format = (
         "%(message)s"
