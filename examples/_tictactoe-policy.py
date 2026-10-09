@@ -1,11 +1,18 @@
 """Train, save, load, and use a policy through the Python API."""
 
+# The filename follows the repository's executable-example convention, and the
+# workflow intentionally mirrors integration coverage for a copyable example.
+# pylint: disable=invalid-name,duplicate-code
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from tictactoe_policy import GameConfig, TicTacToePolicy
 from tictactoe_policy.evaluation import evaluate_policy
+from tictactoe_policy.logger import init
 from tictactoe_policy.training import train_policy
+
+logger = init(__name__)
 
 
 config = GameConfig(board_size=4)
@@ -52,9 +59,9 @@ with TemporaryDirectory() as temp_directory:
     )
 
     assert board[move] == 0
-    print("board size:", policy.board_size)
-    print("win length:", policy.win_length)
-    print("parameters:", policy.parameter_count)
-    print("training examples:", result.example_count)
-    print("chosen legal move:", move)
-    print("teacher-move agreement:", report.move_agreement)
+    logger.info("Board size: %s", policy.board_size)
+    logger.info("Win length: %s", policy.win_length)
+    logger.info("Parameters: %s", policy.parameter_count)
+    logger.info("Training examples: %s", result.example_count)
+    logger.info("Chosen legal move: %s", move)
+    logger.info("Teacher-move agreement: %s", report.move_agreement)

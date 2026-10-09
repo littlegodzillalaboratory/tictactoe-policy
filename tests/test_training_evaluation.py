@@ -5,14 +5,14 @@ from tictactoe_policy.evaluation import evaluate_policy
 from tictactoe_policy.training import train_policy
 
 
-def test_small_sampled_training_run(tmp_path):
-    """A sampled run trains and saves loadable metadata."""
-    path = tmp_path / "small.pt"
+def test_small_sampled_training_run():
+    """A sampled run trains a policy with the requested metadata."""
     result = train_policy(
-        GameConfig(4), hidden_size=4, samples=8, search_depth=1, epochs=1, output=path
+        GameConfig(4), hidden_size=4, samples=8, search_depth=1, epochs=1
     )
     assert result.example_count > 0
-    assert TicTacToePolicy.load(path).board_size == 4
+    assert result.policy.board_size == 4
+    assert result.policy.hidden_size == 4
 
 
 def test_sampled_evaluator_report():

@@ -30,15 +30,12 @@ def test_illegal_move_masking():
     assert policy.choose_move(board) == 2
 
 
-def test_save_load_metadata_and_incompatible_board(tmp_path):
-    """Checkpoint metadata reconstructs the architecture and enforces size."""
-    path = tmp_path / "policy.pt"
-    original = TicTacToePolicy(GameConfig(4), 7)
-    original.save(path)
-    loaded = TicTacToePolicy.load(path)
-    assert (loaded.board_size, loaded.win_length, loaded.hidden_size) == (4, 4, 7)
+def test_policy_metadata_and_incompatible_board():
+    """Policy metadata exposes its architecture and enforces board size."""
+    policy = TicTacToePolicy(GameConfig(4), 7)
+    assert (policy.board_size, policy.win_length, policy.hidden_size) == (4, 4, 7)
     with pytest.raises(ValueError, match="16 cells"):
-        loaded.choose_move([0] * 9)
+        policy.choose_move([0] * 9)
 
 
 def test_choose_move_forced_win_with_configured_scores():

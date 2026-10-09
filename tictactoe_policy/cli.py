@@ -5,8 +5,11 @@ import json
 
 from .evaluation import evaluate_policy
 from .game import MAX_BOARD_SIZE, MIN_BOARD_SIZE, GameConfig
+from .logger import init
 from .policy import TicTacToePolicy
 from .training import train_policy
+
+logger = init(__name__, stdout=True, message_only=True)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -54,7 +57,8 @@ def main() -> None:
             symmetry=not args.no_symmetry,
             output=args.output,
         )
-        print(
+        logger.info(
+            "%s",
             json.dumps(
                 {
                     "examples": result.example_count,
@@ -62,7 +66,7 @@ def main() -> None:
                     "parameters": result.policy.parameter_count,
                 },
                 indent=2,
-            )
+            ),
         )
     else:
         report = evaluate_policy(
@@ -72,4 +76,4 @@ def main() -> None:
             games=args.games,
             seed=args.seed,
         )
-        print(json.dumps(report.to_dict(), indent=2))
+        logger.info("%s", json.dumps(report.to_dict(), indent=2))
