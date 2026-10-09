@@ -1,5 +1,7 @@
 """Tests for network and runtime policy."""
 
+from unittest.mock import patch
+
 import pytest
 import torch
 
@@ -58,3 +60,47 @@ def test_terminal_board_rejected():
     policy = TicTacToePolicy(GameConfig(3))
     with pytest.raises(ValueError, match="terminal"):
         policy.choose_move([1, 1, 1, -1, -1, 0, 0, 0, 0])
+
+
+@patch("tictactoe_policy.policy.torch.save")
+def test_policy_save_includes_reconstruction_metadata(mock_save):
+    """Saving delegates a complete metadata-bearing checkpoint to PyTorch."""
+    policy = TicTacToePolicy(GameConfig(4, 3), 7)
+    policy.save("policy.pt")
+    checkpoint, path = mock_save.call_args.args
+    assert path == "policy.pt"
+    assert checkpoint["format_version"] == policy.FORMAT_VERSION
+    assert checkpoint["board_size"] == 4
+    assert checkpoint["win_length"] == 3
+    assert checkpoint["hidden_size"] == 7
+    expected_state = policy.network.state_dict()
+    assert checkpoint["state_dict"].keys() == expected_state.keys()
+    for name, parameter in checkpoint["state_dict"].items():
+        assert torch.equal(parameter, expected_state[name])
+
+
+@patch("tictactoe_policy.policy.torch.load")
+def test_policy_load_reconstructs_checkpoint(mock_load):
+    """Loading reconstructs the architecture and restores its parameters."""
+    original = TicTacToePolicy(GameConfig(4, 3), 7)
+    mock_load.return_value = {
+        "state_dict": original.network.state_dict(),
+        "board_size": 4,
+        "win_length": 3,
+        "hidden_size": 7,
+    }
+    loaded = TicTacToePolicy.load("policy.pt")
+    mock_load.assert_called_once_with(
+        "policy.pt", map_location="cpu", weights_only=True
+    )
+    assert (loaded.board_size, loaded.win_length, loaded.hidden_size) == (4, 3, 7)
+    assert loaded.network.training is False
+
+
+@pytest.mark.parametrize("checkpoint", [None, {}, {"state_dict": {}}])
+@patch("tictactoe_policy.policy.torch.load")
+def test_policy_load_rejects_incomplete_checkpoint(mock_load, checkpoint):
+    """Checkpoint loading rejects non-dictionaries and missing metadata."""
+    mock_load.return_value = checkpoint
+    with pytest.raises(ValueError, match="required metadata"):
+        TicTacToePolicy.load("policy.pt")

@@ -1,5 +1,7 @@
 """Tests for command-line argument validation."""
 
+import runpy
+
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -7,6 +9,7 @@ import pytest
 
 from tictactoe_policy import cli
 from tictactoe_policy.cli import build_parser
+from tictactoe_policy.logger import init
 
 
 @pytest.mark.parametrize("size", [2, 9])
@@ -77,3 +80,25 @@ def test_main_dispatches_evaluate(mock_parser, mock_load, mock_evaluate, mock_lo
     mock_load.assert_called_once_with("policy.pt")
     mock_evaluate.assert_called_once()
     mock_logger.info.assert_called_once()
+
+
+@patch("tictactoe_policy.cli.main")
+def test_module_entry_point_calls_main(mock_main):
+    """Executing the package module invokes the command-line entry point."""
+    runpy.run_module("tictactoe_policy.__main__", run_name="__main__")
+    mock_main.assert_called_once_with()
+
+
+@patch("tictactoe_policy.cli.main")
+def test_module_entry_point_does_not_run_when_imported(mock_main):
+    """Importing the entry-point module does not execute the CLI."""
+    runpy.run_module("tictactoe_policy.__main__", run_name="imported_entry_point")
+    mock_main.assert_not_called()
+
+
+@patch("tictactoe_policy.logger.Conflog")
+def test_logger_can_keep_default_output_stream(mock_conflog):
+    """Logger initialization leaves handlers unchanged by default."""
+    adapter = init("test.logger")
+    assert adapter == mock_conflog.return_value.get_logger.return_value
+    mock_conflog.return_value.handlers.__iter__.assert_not_called()

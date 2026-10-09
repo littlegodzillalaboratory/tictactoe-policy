@@ -58,3 +58,57 @@ def test_configurable_shorter_win_length():
     """The line engine supports future shorter winning conditions."""
     game = TicTacToeGame(GameConfig(4, 3))
     assert game.winner([1, 1, 1, 0] + [0] * 12) == 1
+
+
+@pytest.mark.parametrize("win_length", [0, 4])
+def test_invalid_win_length(win_length):
+    """Winning length must fit within the configured board."""
+    with pytest.raises(ValueError, match="win_length"):
+        GameConfig(3, win_length)
+
+
+@pytest.mark.parametrize(
+    ("board", "message"),
+    [
+        ([1, 1, 0, 0, 0, 0, 0, 0, 0], "invalid number"),
+        ([1, 1, 1, -1, -1, -1, 0, 0, 0], "both players"),
+        ([1, 1, 1, -1, -1, 0, -1, 0, 0], "X win"),
+        ([1, 1, 0, -1, -1, -1, 1, 0, 1], "O win"),
+    ],
+)
+def test_unreachable_boards_are_rejected(board, message):
+    """Turn counts and winning positions must describe reachable play."""
+    with pytest.raises(ValueError, match=message):
+        TicTacToeGame().validate_board(board)
+
+
+def test_validation_can_skip_reachability_checks():
+    """Callers can validate representation without validating game history."""
+    board = [1, 1, 0, 0, 0, 0, 0, 0, 0]
+    assert TicTacToeGame().validate_board(board, check_reachable=False) == tuple(board)
+
+
+def test_full_board_is_terminal_without_a_winner():
+    """A filled draw is terminal and has no winning player."""
+    board = (1, -1, 1, 1, -1, -1, -1, 1, 1)
+    game = TicTacToeGame()
+    assert game.winner(board) == 0
+    assert game.is_terminal(board)
+    with pytest.raises(ValueError, match="terminal"):
+        game.infer_player(board)
+
+
+@pytest.mark.parametrize(
+    ("move", "player"),
+    [(-1, 1), (9, 1), (0, 0), (0, 2)],
+)
+def test_apply_move_rejects_invalid_move_or_player(move, player):
+    """Moves require a valid player and an empty in-range cell."""
+    with pytest.raises(ValueError):
+        TicTacToeGame.apply_move((0,) * 9, move, player)
+
+
+def test_apply_move_rejects_occupied_cell():
+    """A player cannot overwrite an occupied cell."""
+    with pytest.raises(ValueError, match="empty cell"):
+        TicTacToeGame.apply_move((1,) + (0,) * 8, 0, -1)
