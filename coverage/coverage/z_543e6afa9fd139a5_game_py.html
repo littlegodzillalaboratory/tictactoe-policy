@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="z_543e6afa9fd139a5_logger_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.13.5">coverage.py v7.13.5</a>,
-            created at 2026-10-09 22:35 +0000
+            created at 2026-10-09 22:53 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -99,7 +99,7 @@
     <p class="run"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t">    <span class="key">def</span> <span class="nam">__post_init__</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t18" href="#t18">18</a></span><span class="t">        <span class="key">if</span> <span class="key">not</span> <span class="nam">MIN_BOARD_SIZE</span> <span class="op">&lt;=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">board_size</span> <span class="op">&lt;=</span> <span class="nam">MAX_BOARD_SIZE</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t19" href="#t19">19</a></span><span class="t">            <span class="key">raise</span> <span class="nam">ValueError</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t20" href="#t20">20</a></span><span class="t">                <span class="fst">f"</span><span class="fst">board_size must be between </span><span class="op">{</span><span class="nam">MIN_BOARD_SIZE</span><span class="op">}</span><span class="fst"> and </span><span class="op">{</span><span class="nam">MAX_BOARD_SIZE</span><span class="op">}</span><span class="fst">"</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t20" href="#t20">20</a></span><span class="t">                <span class="str">f"board_size must be between {MIN_BOARD_SIZE} and {MAX_BOARD_SIZE}"</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t21" href="#t21">21</a></span><span class="t">            <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t22" href="#t22">22</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">win_length</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t23" href="#t23">23</a></span><span class="t">            <span class="nam">object</span><span class="op">.</span><span class="nam">__setattr__</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="str">"win_length"</span><span class="op">,</span> <span class="nam">self</span><span class="op">.</span><span class="nam">board_size</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -142,7 +142,7 @@
     <p class="pln"><span class="n"><a id="t60" href="#t60">60</a></span><span class="t">        <span class="str">"""Validate and return an immutable board."""</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t61" href="#t61">61</a></span><span class="t">        <span class="key">if</span> <span class="nam">len</span><span class="op">(</span><span class="nam">board</span><span class="op">)</span> <span class="op">!=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">config</span><span class="op">.</span><span class="nam">cell_count</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t62" href="#t62">62</a></span><span class="t">            <span class="key">raise</span> <span class="nam">ValueError</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t63" href="#t63">63</a></span><span class="t">                <span class="fst">f"</span><span class="fst">board must contain </span><span class="op">{</span><span class="nam">self</span><span class="op">.</span><span class="nam">config</span><span class="op">.</span><span class="nam">cell_count</span><span class="op">}</span><span class="fst"> cells, got </span><span class="op">{</span><span class="nam">len</span><span class="op">(</span><span class="nam">board</span><span class="op">)</span><span class="op">}</span><span class="fst">"</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t63" href="#t63">63</a></span><span class="t">                <span class="str">f"board must contain {self.config.cell_count} cells, got {len(board)}"</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t64" href="#t64">64</a></span><span class="t">            <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t65" href="#t65">65</a></span><span class="t">        <span class="nam">result</span> <span class="op">=</span> <span class="nam">tuple</span><span class="op">(</span><span class="nam">board</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t66" href="#t66">66</a></span><span class="t">        <span class="key">if</span> <span class="nam">any</span><span class="op">(</span><span class="nam">cell</span> <span class="key">not</span> <span class="key">in</span> <span class="op">(</span><span class="op">-</span><span class="num">1</span><span class="op">,</span> <span class="num">0</span><span class="op">,</span> <span class="num">1</span><span class="op">)</span> <span class="key">for</span> <span class="nam">cell</span> <span class="key">in</span> <span class="nam">result</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -209,7 +209,7 @@
             <a class="nav" href="z_543e6afa9fd139a5_logger_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.13.5">coverage.py v7.13.5</a>,
-            created at 2026-10-09 22:35 +0000
+            created at 2026-10-09 22:53 +0000
         </p>
     </div>
 </footer>
