@@ -1,5 +1,7 @@
 """Tests for training and evaluation interfaces."""
 
+import pytest
+
 from tictactoe_policy import GameConfig, TicTacToePolicy
 from tictactoe_policy.evaluation import evaluate_policy
 from tictactoe_policy.training import train_policy
@@ -27,3 +29,9 @@ def test_sampled_evaluator_report():
     assert sum(report.games_vs_random_as_x.values()) == 1
     assert sum(report.games_vs_teacher_as_o.values()) == 1
     assert report.seed == 42
+
+
+def test_training_rejects_invalid_epoch_count():
+    """Training requires at least one epoch."""
+    with pytest.raises(ValueError, match="epochs"):
+        train_policy(GameConfig(4), epochs=0)

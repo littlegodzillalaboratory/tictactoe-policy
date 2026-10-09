@@ -20,6 +20,12 @@ def test_architecture_rejects_unsupported_board_size(size):
         PolicyNetwork(size)
 
 
+def test_architecture_rejects_invalid_hidden_size():
+    """The network requires at least one hidden unit."""
+    with pytest.raises(ValueError, match="hidden_size"):
+        PolicyNetwork(3, 0)
+
+
 def test_illegal_move_masking():
     """Occupied moves can never be selected."""
     policy = TicTacToePolicy(GameConfig(3), 2)

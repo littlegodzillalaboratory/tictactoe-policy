@@ -114,7 +114,7 @@ test-examples:
 
 coverage:
 	rm -rf stage/gh-pages/coverage/coverage/ stage/coverage/ && mkdir -p stage/gh-pages/coverage/coverage/ stage/coverage/
-	$(call python_venv,COVERAGE_FILE=.coverage.unit coverage run --source=./$(PACKAGE_NAME) -m unittest discover -s tests)
+	$(call python_venv,COVERAGE_FILE=.coverage.unit coverage run --source=./$(PACKAGE_NAME) -m pytest tests)
 	$(call python_venv,coverage combine)
 	$(call python_venv,coverage report)
 	$(call python_venv,coverage html && rm -f stage/gh-pages/coverage/coverage/.gitignore)

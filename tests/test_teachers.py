@@ -3,7 +3,7 @@
 import pytest
 
 from tictactoe_policy import GameConfig, TicTacToeGame
-from tictactoe_policy.dataset import immediate_moves
+from tictactoe_policy.dataset import immediate_moves, sampled_examples
 from tictactoe_policy.minimax import ExactMinimax, reachable_positions
 from tictactoe_policy.search import BoundedSearch
 
@@ -38,3 +38,15 @@ def test_bounded_search_blocks_immediate_loss():
     game = TicTacToeGame(GameConfig(4))
     board = (-1, -1, -1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
     assert BoundedSearch(game, 2).best_moves(board, 1) == {3}
+
+
+def test_bounded_search_rejects_invalid_depth():
+    """Bounded search requires a positive depth."""
+    with pytest.raises(ValueError, match="max_depth"):
+        BoundedSearch(TicTacToeGame(), 0)
+
+
+def test_sampled_examples_reject_invalid_count():
+    """Sample generation requires at least one requested position."""
+    with pytest.raises(ValueError, match="sample_count"):
+        sampled_examples(TicTacToeGame(GameConfig(4)), 0)
