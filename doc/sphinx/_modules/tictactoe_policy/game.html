@@ -34,7 +34,9 @@
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span>
 
+<span class="c1">#: Smallest supported board width and height.</span>
 <span class="n">MIN_BOARD_SIZE</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="c1">#: Largest supported board width and height.</span>
 <span class="n">MAX_BOARD_SIZE</span> <span class="o">=</span> <span class="mi">8</span>
 
 
@@ -42,9 +44,19 @@
 <a class="viewcode-back" href="../../tictactoe_policy.html#tictactoe_policy.game.GameConfig">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">GameConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Immutable game dimensions.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Immutable game dimensions.</span>
 
+<span class="sd">    :param board_size: Board width and height, from 3 through 8.</span>
+<span class="sd">    :param win_length: Consecutive marks required to win. Defaults to the board</span>
+<span class="sd">        size when omitted.</span>
+<span class="sd">    :raises ValueError: If either dimension is outside its valid range.</span>
+<span class="sd">    :ivar board_size: Configured board width and height.</span>
+<span class="sd">    :ivar win_length: Configured number of consecutive marks needed to win.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: Board width and height.</span>
     <span class="n">board_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="c1">#: Consecutive marks required to win.</span>
     <span class="n">win_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -59,7 +71,10 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cell_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of cells.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the total number of board cells.</span>
+
+<span class="sd">        :returns: ``board_size`` squared.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">board_size</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">board_size</span></div>
 
 
@@ -67,7 +82,12 @@
 <div class="viewcode-block" id="TicTacToeGame">
 <a class="viewcode-back" href="../../tictactoe_policy.html#tictactoe_policy.game.TicTacToeGame">[docs]</a>
 <span class="k">class</span> <span class="nc">TicTacToeGame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate boards and implement rules derived from a :class:`GameConfig`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate boards and implement configurable Tic-Tac-Toe rules.</span>
+
+<span class="sd">    :param config: Game dimensions. Standard 3x3 rules are used when omitted.</span>
+<span class="sd">    :ivar config: Dimensions used by this game.</span>
+<span class="sd">    :ivar lines: Every winning line expressed as row-major cell indices.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">GameConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span> <span class="ow">or</span> <span class="n">GameConfig</span><span class="p">()</span>
@@ -95,7 +115,15 @@
     <span class="k">def</span> <span class="nf">validate_board</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">check_reachable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate and return an immutable board.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate a board and return an immutable representation.</span>
+
+<span class="sd">        :param board: Board cells in row-major order, using ``1`` for X,</span>
+<span class="sd">            ``-1`` for O, and ``0`` for an empty cell.</span>
+<span class="sd">        :param check_reachable: Validate turn counts and winner consistency.</span>
+<span class="sd">        :returns: The validated board as a tuple.</span>
+<span class="sd">        :raises ValueError: If the dimensions, cells, turn counts, or winners</span>
+<span class="sd">            are invalid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">board</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">cell_count</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;board must contain </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">cell_count</span><span class="si">}</span><span class="s2"> cells, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">board</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -121,7 +149,11 @@
 <div class="viewcode-block" id="TicTacToeGame.winners">
 <a class="viewcode-back" href="../../tictactoe_policy.html#tictactoe_policy.game.TicTacToeGame.winners">[docs]</a>
     <span class="k">def</span> <span class="nf">winners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return every player with a completed winning line.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find every player with a completed winning line.</span>
+
+<span class="sd">        :param board: Board cells in row-major order.</span>
+<span class="sd">        :returns: Set containing ``1`` and/or ``-1`` for winning players.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="n">board</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span>
@@ -133,7 +165,12 @@
 <div class="viewcode-block" id="TicTacToeGame.winner">
 <a class="viewcode-back" href="../../tictactoe_policy.html#tictactoe_policy.game.TicTacToeGame.winner">[docs]</a>
     <span class="k">def</span> <span class="nf">winner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the winner, or zero when there is none.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the sole winner of a board.</span>
+
+<span class="sd">        :param board: Board cells in row-major order.</span>
+<span class="sd">        :returns: ``1`` for X, ``-1`` for O, or ``0`` when there is no sole</span>
+<span class="sd">            winner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">winners</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">winners</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">winners</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">winners</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span></div>
 
@@ -141,21 +178,34 @@
 <div class="viewcode-block" id="TicTacToeGame.legal_moves">
 <a class="viewcode-back" href="../../tictactoe_policy.html#tictactoe_policy.game.TicTacToeGame.legal_moves">[docs]</a>
     <span class="k">def</span> <span class="nf">legal_moves</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return unoccupied move indices.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List the unoccupied cells on a board.</span>
+
+<span class="sd">        :param board: Board cells in row-major order.</span>
+<span class="sd">        :returns: Legal move indices in ascending order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">board</span><span class="p">)</span> <span class="k">if</span> <span class="n">cell</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="TicTacToeGame.is_terminal">
 <a class="viewcode-back" href="../../tictactoe_policy.html#tictactoe_policy.game.TicTacToeGame.is_terminal">[docs]</a>
     <span class="k">def</span> <span class="nf">is_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether a board is won or full.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine whether a board is won or full.</span>
+
+<span class="sd">        :param board: Board cells in row-major order.</span>
+<span class="sd">        :returns: True when play cannot continue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">winners</span><span class="p">(</span><span class="n">board</span><span class="p">))</span> <span class="ow">or</span> <span class="mi">0</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">board</span></div>
 
 
 <div class="viewcode-block" id="TicTacToeGame.infer_player">
 <a class="viewcode-back" href="../../tictactoe_policy.html#tictactoe_policy.game.TicTacToeGame.infer_player">[docs]</a>
     <span class="k">def</span> <span class="nf">infer_player</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Infer the current player from an X-first reachable board.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Infer whose turn follows an X-first reachable board.</span>
+
+<span class="sd">        :param board: Non-terminal board cells in row-major order.</span>
+<span class="sd">        :returns: ``1`` when X moves next or ``-1`` when O moves next.</span>
+<span class="sd">        :raises ValueError: If the board is invalid or terminal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">(</span><span class="n">valid</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;cannot infer a player for a terminal board&quot;</span><span class="p">)</span>
@@ -166,7 +216,14 @@
 <a class="viewcode-back" href="../../tictactoe_policy.html#tictactoe_policy.game.TicTacToeGame.apply_move">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">apply_move</span><span class="p">(</span><span class="n">board</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">move</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">player</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a board with one legal move applied.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply one legal move without modifying the input board.</span>
+
+<span class="sd">        :param board: Board cells in row-major order.</span>
+<span class="sd">        :param move: Index of the empty cell to occupy.</span>
+<span class="sd">        :param player: Player mark, either ``1`` or ``-1``.</span>
+<span class="sd">        :returns: A new immutable board containing the move.</span>
+<span class="sd">        :raises ValueError: If the player or move is invalid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">player</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;player must be -1 or 1&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">move</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">move</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">board</span><span class="p">)</span> <span class="ow">or</span> <span class="n">board</span><span class="p">[</span><span class="n">move</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>

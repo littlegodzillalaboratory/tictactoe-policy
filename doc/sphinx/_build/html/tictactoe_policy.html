@@ -52,69 +52,192 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tictactoe_policy.game.</span></span><span class="sig-name descname"><span class="pre">GameConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tictactoe_policy/game.html#GameConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.GameConfig" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Immutable game dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>board_size</strong> – Board width and height, from 3 through 8.</p></li>
+<li><p><strong>win_length</strong> – Consecutive marks required to win. Defaults to the board
+size when omitted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If either dimension is outside its valid range.</p>
+</dd>
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>board_size</strong> – Configured board width and height.</p></li>
+<li><p><strong>win_length</strong> – Configured number of consecutive marks needed to win.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="tictactoe_policy.game.GameConfig.board_size">
 <span class="sig-name descname"><span class="pre">board_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#tictactoe_policy.game.GameConfig.board_size" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Board width and height.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="tictactoe_policy.game.GameConfig.cell_count">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cell_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#tictactoe_policy.game.GameConfig.cell_count" title="Link to this definition">¶</a></dt>
-<dd><p>Return the number of cells.</p>
+<dd><p>Return the total number of board cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">board_size</span></code> squared.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="tictactoe_policy.game.GameConfig.win_length">
 <span class="sig-name descname"><span class="pre">win_length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#tictactoe_policy.game.GameConfig.win_length" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Consecutive marks required to win.</p>
+</dd></dl>
 
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="tictactoe_policy.game.MAX_BOARD_SIZE">
+<span class="sig-prename descclassname"><span class="pre">tictactoe_policy.game.</span></span><span class="sig-name descname"><span class="pre">MAX_BOARD_SIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#tictactoe_policy.game.MAX_BOARD_SIZE" title="Link to this definition">¶</a></dt>
+<dd><p>Largest supported board width and height.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="tictactoe_policy.game.MIN_BOARD_SIZE">
+<span class="sig-prename descclassname"><span class="pre">tictactoe_policy.game.</span></span><span class="sig-name descname"><span class="pre">MIN_BOARD_SIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#tictactoe_policy.game.MIN_BOARD_SIZE" title="Link to this definition">¶</a></dt>
+<dd><p>Smallest supported board width and height.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tictactoe_policy.game.</span></span><span class="sig-name descname"><span class="pre">TicTacToeGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#tictactoe_policy.game.GameConfig" title="tictactoe_policy.game.GameConfig"><span class="pre">GameConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Validate boards and implement rules derived from a <a class="reference internal" href="#tictactoe_policy.game.GameConfig" title="tictactoe_policy.game.GameConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">GameConfig</span></code></a>.</p>
+<p>Validate boards and implement configurable Tic-Tac-Toe rules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> – Game dimensions. Standard 3x3 rules are used when omitted.</p>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>config</strong> – Dimensions used by this game.</p></li>
+<li><p><strong>lines</strong> – Every winning line expressed as row-major cell indices.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.apply_move">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">apply_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.apply_move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.apply_move" title="Link to this definition">¶</a></dt>
-<dd><p>Return a board with one legal move applied.</p>
+<dd><p>Apply one legal move without modifying the input board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>board</strong> – Board cells in row-major order.</p></li>
+<li><p><strong>move</strong> – Index of the empty cell to occupy.</p></li>
+<li><p><strong>player</strong> – Player mark, either <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new immutable board containing the move.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the player or move is invalid.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.infer_player">
 <span class="sig-name descname"><span class="pre">infer_player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.infer_player"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.infer_player" title="Link to this definition">¶</a></dt>
-<dd><p>Infer the current player from an X-first reachable board.</p>
+<dd><p>Infer whose turn follows an X-first reachable board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>board</strong> – Non-terminal board cells in row-major order.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">1</span></code> when X moves next or <code class="docutils literal notranslate"><span class="pre">-1</span></code> when O moves next.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the board is invalid or terminal.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.is_terminal">
 <span class="sig-name descname"><span class="pre">is_terminal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.is_terminal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.is_terminal" title="Link to this definition">¶</a></dt>
-<dd><p>Return whether a board is won or full.</p>
+<dd><p>Determine whether a board is won or full.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>board</strong> – Board cells in row-major order.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True when play cannot continue.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.legal_moves">
 <span class="sig-name descname"><span class="pre">legal_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.legal_moves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.legal_moves" title="Link to this definition">¶</a></dt>
-<dd><p>Return unoccupied move indices.</p>
+<dd><p>List the unoccupied cells on a board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>board</strong> – Board cells in row-major order.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Legal move indices in ascending order.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.validate_board">
 <span class="sig-name descname"><span class="pre">validate_board</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_reachable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.validate_board"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.validate_board" title="Link to this definition">¶</a></dt>
-<dd><p>Validate and return an immutable board.</p>
+<dd><p>Validate a board and return an immutable representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>board</strong> – Board cells in row-major order, using <code class="docutils literal notranslate"><span class="pre">1</span></code> for X,
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> for O, and <code class="docutils literal notranslate"><span class="pre">0</span></code> for an empty cell.</p></li>
+<li><p><strong>check_reachable</strong> – Validate turn counts and winner consistency.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The validated board as a tuple.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the dimensions, cells, turn counts, or winners
+are invalid.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.winner">
 <span class="sig-name descname"><span class="pre">winner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.winner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.winner" title="Link to this definition">¶</a></dt>
-<dd><p>Return the winner, or zero when there is none.</p>
+<dd><p>Return the sole winner of a board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>board</strong> – Board cells in row-major order.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">1</span></code> for X, <code class="docutils literal notranslate"><span class="pre">-1</span></code> for O, or <code class="docutils literal notranslate"><span class="pre">0</span></code> when there is no sole
+winner.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.winners">
 <span class="sig-name descname"><span class="pre">winners</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.winners"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.winners" title="Link to this definition">¶</a></dt>
-<dd><p>Return every player with a completed winning line.</p>
+<dd><p>Find every player with a completed winning line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>board</strong> – Board cells in row-major order.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Set containing <code class="docutils literal notranslate"><span class="pre">1</span></code> and/or <code class="docutils literal notranslate"><span class="pre">-1</span></code> for winning players.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -177,6 +300,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.GameConfig.win_length"><code class="docutils literal notranslate"><span class="pre">GameConfig.win_length</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#tictactoe_policy.game.MAX_BOARD_SIZE"><code class="docutils literal notranslate"><span class="pre">MAX_BOARD_SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tictactoe_policy.game.MIN_BOARD_SIZE"><code class="docutils literal notranslate"><span class="pre">MIN_BOARD_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame.apply_move"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame.apply_move()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame.infer_player"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame.infer_player()</span></code></a></li>
