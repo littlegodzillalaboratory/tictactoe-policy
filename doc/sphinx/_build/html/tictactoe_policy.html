@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>tictactoe_policy package &#8212; tictactoe_policy  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=cb25574f" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="tictactoe_policy documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tictactoe-policy-package">
+<h1>tictactoe_policy package<a class="headerlink" href="#tictactoe-policy-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="tictactoe-policy-cli-module">
+<h2>tictactoe_policy.cli module<a class="headerlink" href="#tictactoe-policy-cli-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="tictactoe-policy-dataset-module">
+<h2>tictactoe_policy.dataset module<a class="headerlink" href="#tictactoe-policy-dataset-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="tictactoe-policy-evaluation-module">
+<h2>tictactoe_policy.evaluation module<a class="headerlink" href="#tictactoe-policy-evaluation-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-tictactoe_policy.game">
+<span id="tictactoe-policy-game-module"></span><h2>tictactoe_policy.game module<a class="headerlink" href="#module-tictactoe_policy.game" title="Link to this heading">¶</a></h2>
+<p>Board configuration and rules for configurable Tic-Tac-Toe.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="tictactoe_policy.game.GameConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tictactoe_policy.game.</span></span><span class="sig-name descname"><span class="pre">GameConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tictactoe_policy/game.html#GameConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.GameConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Immutable game dimensions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tictactoe_policy.game.GameConfig.board_size">
+<span class="sig-name descname"><span class="pre">board_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#tictactoe_policy.game.GameConfig.board_size" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="tictactoe_policy.game.GameConfig.cell_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cell_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#tictactoe_policy.game.GameConfig.cell_count" title="Link to this definition">¶</a></dt>
+<dd><p>Return the number of cells.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tictactoe_policy.game.GameConfig.win_length">
+<span class="sig-name descname"><span class="pre">win_length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#tictactoe_policy.game.GameConfig.win_length" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tictactoe_policy.game.</span></span><span class="sig-name descname"><span class="pre">TicTacToeGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#tictactoe_policy.game.GameConfig" title="tictactoe_policy.game.GameConfig"><span class="pre">GameConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Validate boards and implement rules derived from a <a class="reference internal" href="#tictactoe_policy.game.GameConfig" title="tictactoe_policy.game.GameConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">GameConfig</span></code></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.apply_move">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">apply_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.apply_move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.apply_move" title="Link to this definition">¶</a></dt>
+<dd><p>Return a board with one legal move applied.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.infer_player">
+<span class="sig-name descname"><span class="pre">infer_player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.infer_player"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.infer_player" title="Link to this definition">¶</a></dt>
+<dd><p>Infer the current player from an X-first reachable board.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.is_terminal">
+<span class="sig-name descname"><span class="pre">is_terminal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.is_terminal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.is_terminal" title="Link to this definition">¶</a></dt>
+<dd><p>Return whether a board is won or full.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.legal_moves">
+<span class="sig-name descname"><span class="pre">legal_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.legal_moves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.legal_moves" title="Link to this definition">¶</a></dt>
+<dd><p>Return unoccupied move indices.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.validate_board">
+<span class="sig-name descname"><span class="pre">validate_board</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_reachable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.validate_board"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.validate_board" title="Link to this definition">¶</a></dt>
+<dd><p>Validate and return an immutable board.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.winner">
+<span class="sig-name descname"><span class="pre">winner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.winner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.winner" title="Link to this definition">¶</a></dt>
+<dd><p>Return the winner, or zero when there is none.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tictactoe_policy.game.TicTacToeGame.winners">
+<span class="sig-name descname"><span class="pre">winners</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/tictactoe_policy/game.html#TicTacToeGame.winners"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tictactoe_policy.game.TicTacToeGame.winners" title="Link to this definition">¶</a></dt>
+<dd><p>Return every player with a completed winning line.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="tictactoe-policy-logger-module">
+<h2>tictactoe_policy.logger module<a class="headerlink" href="#tictactoe-policy-logger-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="tictactoe-policy-minimax-module">
+<h2>tictactoe_policy.minimax module<a class="headerlink" href="#tictactoe-policy-minimax-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="tictactoe-policy-model-module">
+<h2>tictactoe_policy.model module<a class="headerlink" href="#tictactoe-policy-model-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="tictactoe-policy-policy-module">
+<h2>tictactoe_policy.policy module<a class="headerlink" href="#tictactoe-policy-policy-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="tictactoe-policy-search-module">
+<h2>tictactoe_policy.search module<a class="headerlink" href="#tictactoe-policy-search-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="tictactoe-policy-symmetry-module">
+<h2>tictactoe_policy.symmetry module<a class="headerlink" href="#tictactoe-policy-symmetry-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="tictactoe-policy-training-module">
+<h2>tictactoe_policy.training module<a class="headerlink" href="#tictactoe-policy-training-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">tictactoe_policy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tictactoe_policy package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-cli-module">tictactoe_policy.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-dataset-module">tictactoe_policy.dataset module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-evaluation-module">tictactoe_policy.evaluation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tictactoe_policy.game">tictactoe_policy.game module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tictactoe_policy.game.GameConfig"><code class="docutils literal notranslate"><span class="pre">GameConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.GameConfig.board_size"><code class="docutils literal notranslate"><span class="pre">GameConfig.board_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.GameConfig.cell_count"><code class="docutils literal notranslate"><span class="pre">GameConfig.cell_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.GameConfig.win_length"><code class="docutils literal notranslate"><span class="pre">GameConfig.win_length</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame.apply_move"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame.apply_move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame.infer_player"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame.infer_player()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame.is_terminal"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame.is_terminal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame.legal_moves"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame.legal_moves()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame.validate_board"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame.validate_board()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame.winner"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame.winner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tictactoe_policy.game.TicTacToeGame.winners"><code class="docutils literal notranslate"><span class="pre">TicTacToeGame.winners()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-logger-module">tictactoe_policy.logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-minimax-module">tictactoe_policy.minimax module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-model-module">tictactoe_policy.model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-policy-module">tictactoe_policy.policy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-search-module">tictactoe_policy.search module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-symmetry-module">tictactoe_policy.symmetry module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tictactoe-policy-training-module">tictactoe_policy.training module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">tictactoe_policy documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2026, Little Godzilla Laboratory.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/tictactoe_policy.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
