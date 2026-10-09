@@ -29,7 +29,15 @@ include = "tictactoe_policy"
 python = "^3.10"
 conflog = "~2.1.0"
 PyYAML = "~6.0.2"
-torch = ">=2.2,<3"
+torch = [
+  { version = ">=2.2,<3", source = "pytorch-cpu", markers = "sys_platform == 'linux'" },
+  { version = ">=2.2,<3", markers = "sys_platform != 'linux'" }
+]
+
+[[tool.poetry.source]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
 
 [tool.poetry.scripts]
 tictactoe-policy = "tictactoe_policy.cli:main"
