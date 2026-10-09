@@ -5,7 +5,7 @@
 <!-- BEGIN:BADGES -->
 [![Build Status](https://github.com/littlegodzillalaboratory/tictactoe-policy/workflows/CI/badge.svg)](https://github.com/littlegodzillalaboratory/tictactoe-policy/actions?query=workflow%3ACI)
 [![Code Scanning Status](https://github.com/littlegodzillalaboratory/tictactoe-policy/workflows/CodeQL/badge.svg)](https://github.com/littlegodzillalaboratory/tictactoe-policy/actions?query=workflow%3ACodeQL)
-[![Dependencies Status](https://img.shields.io/librariesio/release/pypi/tictactoe-policy)](https://libraries.io/github/littlegodzillalaboratory/tictactoe-policy)
+[![Dependencies Status](https://img.shields.io/librariesio/release/pypi/tictactoe-policy)](https://libraries.io/npm/tictactoe-policy)
 [![Security Status](https://snyk.io/test/github/littlegodzillalaboratory/tictactoe-policy/badge.svg)](https://snyk.io/test/github/littlegodzillalaboratory/tictactoe-policy)
 [![Published Version](https://img.shields.io/pypi/v/tictactoe-policy.svg)](https://pypi.python.org/pypi/tictactoe-policy)
 <!-- END:BADGES -->
@@ -237,7 +237,7 @@ commands with a temporary model file.
 ## Colophon
 
 <!-- BEGIN:DEVELOPERS_GUIDE -->
-[Developer's Guide](https://cliffano.github.io/developers-guide-python.html)
+[Developer's Guide](https://littlegodzillalaboratory.github.io/developers-guide-python.html)
 <!-- END:DEVELOPERS_GUIDE -->
 
 <!-- BEGIN:BUILD_REPORTS -->

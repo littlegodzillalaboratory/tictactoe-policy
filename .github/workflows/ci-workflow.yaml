@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       max-parallel: 1
       matrix:
@@ -22,5 +22,5 @@ jobs:
       - run: make test-examples
       - uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.LITTLEGODZILLALABORATORY_GITHUB_TOKEN }}
+          github_token: ${{ secrets.null_GITHUB_TOKEN }}
           publish_dir: stage/gh-pages
