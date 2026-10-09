@@ -12,3 +12,4 @@ generator:
     author_url: null
     github_id: littlegodzillalaboratory
     github_repo: tictactoe-policy
+    github_token_prefix: LITTLEGODZILLALABORATORY
