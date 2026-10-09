@@ -2,6 +2,7 @@
 
 import random
 from dataclasses import asdict, dataclass
+from typing import TypeAlias
 
 import torch
 
@@ -9,6 +10,9 @@ from .dataset import exact_examples, sampled_examples, tactical_accuracy
 from .minimax import ExactMinimax
 from .policy import TicTacToePolicy
 from .search import BoundedSearch
+
+GameResults: TypeAlias = dict[str, int]
+Teacher: TypeAlias = ExactMinimax | BoundedSearch
 
 
 # A report intentionally keeps its stable metrics together for serialization.
@@ -95,7 +99,14 @@ def _choose_normalized(policy: TicTacToePolicy, board: tuple[int, ...]) -> int:
     return int(scores.argmax())
 
 
-def _play_games(policy, teacher, policy_player, count, randomizer):
+def _play_games(
+    policy: TicTacToePolicy,
+    teacher: Teacher | None,
+    policy_player: int,
+    count: int,
+    randomizer: random.Random,
+) -> GameResults:
+    """Play games against a random or teacher opponent and tally outcomes."""
     results = {"wins": 0, "draws": 0, "losses": 0}
     game = policy.game
     for _ in range(count):

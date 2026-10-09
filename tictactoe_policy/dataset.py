@@ -2,7 +2,7 @@
 
 import random
 from collections.abc import Callable
-from typing import Sequence
+from typing import Sequence, TypeAlias
 
 from .game import TicTacToeGame
 from .minimax import ExactMinimax, reachable_positions
@@ -10,6 +10,7 @@ from .search import BoundedSearch
 from .symmetry import augment
 
 Example = tuple[tuple[float, ...], set[int]]
+MoveTeacher: TypeAlias = ExactMinimax | BoundedSearch
 
 
 def immediate_moves(game: TicTacToeGame, board: Sequence[int], player: int) -> set[int]:
@@ -22,7 +23,10 @@ def immediate_moves(game: TicTacToeGame, board: Sequence[int], player: int) -> s
 
 
 def _target_moves(
-    game: TicTacToeGame, board: Sequence[int], player: int, teacher
+    game: TicTacToeGame,
+    board: Sequence[int],
+    player: int,
+    teacher: MoveTeacher,
 ) -> set[int]:
     wins = immediate_moves(game, board, player)
     if wins:

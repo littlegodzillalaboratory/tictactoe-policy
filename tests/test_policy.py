@@ -1,7 +1,7 @@
 """Tests for network and runtime policy."""
 
-import torch
 import pytest
+import torch
 
 from tictactoe_policy import GameConfig, PolicyNetwork, TicTacToePolicy
 
