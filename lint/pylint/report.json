@@ -29,7 +29,52 @@
         "statement": 0,
         "warning": 0
       },
+      "tictactoe_policy.evaluation": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 68,
+        "warning": 0
+      },
+      "tictactoe_policy.__init__": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 4,
+        "warning": 0
+      },
+      "tictactoe_policy.training": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 44,
+        "warning": 0
+      },
+      "tictactoe_policy.dataset": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 66,
+        "warning": 0
+      },
       "tictactoe_policy.cli": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 37,
+        "warning": 0
+      },
+      "tictactoe_policy.minimax": {
         "convention": 0,
         "error": 0,
         "fatal": 0,
@@ -45,87 +90,6 @@
         "info": 0,
         "refactor": 0,
         "statement": 11,
-        "warning": 0
-      },
-      "tictactoe_policy.__main__": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 3,
-        "warning": 0
-      },
-      "tictactoe_policy.dataset": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 66,
-        "warning": 0
-      },
-      "tictactoe_policy.game": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 72,
-        "warning": 0
-      },
-      "tictactoe_policy.policy": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 43,
-        "warning": 0
-      },
-      "tictactoe_policy.minimax": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 37,
-        "warning": 0
-      },
-      "tictactoe_policy.evaluation": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 68,
-        "warning": 0
-      },
-      "tictactoe_policy.model": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 15,
-        "warning": 0
-      },
-      "tictactoe_policy.training": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 44,
-        "warning": 0
-      },
-      "tictactoe_policy.__init__": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 4,
         "warning": 0
       },
       "tictactoe_policy.search": {
@@ -146,6 +110,96 @@
         "statement": 22,
         "warning": 0
       },
+      "tictactoe_policy.model": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 15,
+        "warning": 0
+      },
+      "tictactoe_policy.__main__": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 3,
+        "warning": 0
+      },
+      "tictactoe_policy.policy": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 43,
+        "warning": 0
+      },
+      "tictactoe_policy.game": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 72,
+        "warning": 0
+      },
+      "tests.test_teachers": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 64,
+        "warning": 0
+      },
+      "tests.__init__": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 0,
+        "warning": 0
+      },
+      "tests.models.__init__": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 0,
+        "warning": 0
+      },
+      "tests.test_game": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 52,
+        "warning": 0
+      },
+      "tests.test_policy": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 60,
+        "warning": 0
+      },
+      "tests.test_symmetry": {
+        "convention": 0,
+        "error": 0,
+        "fatal": 0,
+        "info": 0,
+        "refactor": 0,
+        "statement": 11,
+        "warning": 0
+      },
       "tests.test_training_evaluation": {
         "convention": 0,
         "error": 0,
@@ -162,60 +216,6 @@
         "info": 0,
         "refactor": 0,
         "statement": 37,
-        "warning": 0
-      },
-      "tests.test_policy": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 60,
-        "warning": 0
-      },
-      "tests.models.__init__": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 0,
-        "warning": 0
-      },
-      "tests.test_teachers": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 64,
-        "warning": 0
-      },
-      "tests.test_game": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 52,
-        "warning": 0
-      },
-      "tests.__init__": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 0,
-        "warning": 0
-      },
-      "tests.test_symmetry": {
-        "convention": 0,
-        "error": 0,
-        "fatal": 0,
-        "info": 0,
-        "refactor": 0,
-        "statement": 11,
         "warning": 0
       },
       "test_policy_workflow": {
