@@ -152,7 +152,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 64,
+        "statement": 71,
         "warning": 0
       },
       "tests.__init__": {
@@ -179,7 +179,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 52,
+        "statement": 71,
         "warning": 0
       },
       "tests.test_policy": {
@@ -188,7 +188,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 60,
+        "statement": 68,
         "warning": 0
       },
       "tests.test_symmetry": {
@@ -197,7 +197,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 11,
+        "statement": 14,
         "warning": 0
       },
       "tests.test_training_evaluation": {
@@ -206,7 +206,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 36,
+        "statement": 40,
         "warning": 0
       },
       "tests.test_cli": {
@@ -215,7 +215,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 37,
+        "statement": 48,
         "warning": 0
       },
       "test_policy_workflow": {
@@ -224,7 +224,7 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 20,
+        "statement": 27,
         "warning": 0
       },
       "test_cli_workflow": {
@@ -233,11 +233,11 @@
         "fatal": 0,
         "info": 0,
         "refactor": 0,
-        "statement": 19,
+        "statement": 26,
         "warning": 0
       }
     },
-    "statement": 774,
+    "statement": 840,
     "error": 0,
     "warning": 0,
     "refactor": 0,
