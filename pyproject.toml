@@ -7,7 +7,7 @@ no-binary = [ ":none:" ]
 
 [tool.poetry]
 name = "tictactoe-policy"
-version = "1.0.0"
+version = "1.0.1-pre.0"
 description = "Learned policy for Tic-Tac-Toe game with configurable-size boards"
 license = "Apache-2.0"
 authors = [ "Little Godzilla Laboratory <blah+lgl@cliffano.com>" ]
